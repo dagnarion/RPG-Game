@@ -3,11 +3,11 @@
 public abstract class EntityState
 {
     protected StateMachine state;
-    protected string stateName;
-    public EntityState (StateMachine _state,string _stateName)
+    protected string animationName;
+    public EntityState (StateMachine _state,string _animationName)
     {
         state = _state;
-        stateName = _stateName;
+        animationName = _animationName;
     }
     public abstract void Enter();
     public abstract void Update();
