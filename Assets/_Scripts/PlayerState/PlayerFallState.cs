@@ -15,6 +15,11 @@ public class PlayerFallState : PlayerState
             state.ChangeState(player.GroundedState);
             return;
         }
+        if(movement.IsOnWall)
+        {
+            state.ChangeState(player.WallSlideState);
+            return;
+        }
         
     }
     

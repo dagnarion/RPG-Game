@@ -14,9 +14,9 @@ public class PlayerGroundedState : PlayerState
 
     public override void Update()
     {
-        animator.SetFloat("xVelocity",rigi.linearVelocity.x);
+        animator.SetFloat("xVelocity",player.MovementInput.x);
         movement.SetVelocity(movement.Speed * player.MovementInput.x,rigi.linearVelocityY);
-        if(rigi.linearVelocityY < 0)
+        if(rigi.linearVelocityY < 0 && !movement.IsOnGround)
         {
             state.ChangeState(player.FallState);
             return;
