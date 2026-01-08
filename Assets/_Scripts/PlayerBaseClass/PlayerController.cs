@@ -8,18 +8,20 @@ public class PlayerController : MonoBehaviour
     [field:SerializeField] public Animator animator { get; private set; }
     [field:SerializeField] public PlayerMovement Movement {get; private set;}
 
-    Player_InputTesst input;
+    public Player_InputTesst input {get; private set;}
     public StateMachine state;
-    public PlayerIdleState IdleState { get; private set; }
-    public PlayerRunState RunState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
+    public PlayerFallState FallState { get; private set; }
+    public PlayerGroundedState GroundedState {get; private set;}
     public Vector2 MovementInput { get; private set; }
     void Awake()
     {
         input = new Player_InputTesst();
         state = new StateMachine();
         animator = this.GetComponentInChildren<Animator>();
-        IdleState = new PlayerIdleState(this, state, "Idle");
-        RunState = new PlayerRunState(this, state, "Run");
+        GroundedState = new PlayerGroundedState(this,state,"Ground");
+        JumpState = new PlayerJumpState(this,state,"Air");
+        FallState = new PlayerFallState(this,state,"Air");
     }
 
     void OnEnable()
@@ -35,12 +37,14 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        state.Initialize(IdleState);
+        state.Initialize(GroundedState);
     }
 
     void Update()
     {
         state.UpdateActiveState();
+        Movement.GroundCheck();
+        Movement.HandleFlip(MovementInput.x);
     }
 
 }

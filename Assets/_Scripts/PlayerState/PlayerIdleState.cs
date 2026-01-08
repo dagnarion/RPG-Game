@@ -13,11 +13,11 @@ public class PlayerIdleState : PlayerState
 
     public override void Update()
     {
-        if (player.MovementInput.x != 0)
-        {
-            state.ChangeState(player.RunState);
-            return;
-        }
+        // if (player.MovementInput.x != 0)
+        // {
+        //     state.ChangeState(player.RunState);
+        //     return;
+        // }
         player.Movement.SetVelocity(0,rigi.linearVelocity.y);
     }
 
