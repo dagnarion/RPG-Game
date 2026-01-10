@@ -14,6 +14,8 @@ public class PlayerJumpState : PlayerState
 
     public override void Update()
     {
+        base.Update();
+        movement.HandleFlip(player.MovementInput.x);
         animator.SetFloat("yVelocity",rigi.linearVelocityY);
         if(player.MovementInput.x != 0) movement.SetVelocity(movement.Speed * player.MovementInput.x * movement.InAirMoveMultiplier, rigi.linearVelocityY);
         if (rigi.linearVelocityY < 0)

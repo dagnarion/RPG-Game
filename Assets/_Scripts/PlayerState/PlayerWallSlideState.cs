@@ -8,7 +8,14 @@ public class PlayerWallSlideState : PlayerState
 
     public override void Update()
     {
+        movement.HandleFlip(player.MovementInput.x);
         HandleWallSlide();
+        if (input.Player.Jump.WasPressedThisFrame())
+        {
+            state.ChangeState(player.WallJumpState);
+            return;
+        }
+        
         if(movement.IsOnGround)
         {
             state.ChangeState(player.GroundedState);

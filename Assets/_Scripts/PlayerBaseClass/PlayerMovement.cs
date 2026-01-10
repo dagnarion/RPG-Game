@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,14 +9,31 @@ public class PlayerMovement : MonoBehaviour
     [Header("Value")]
     [field:SerializeField] public float Speed {get; private set;}
     [field:SerializeField] public float JumpForce { get; private set;}
+    [field:SerializeField] public Vector2 WallJumpForce { get; private set; }
+    [field:SerializeField] public float DashForce { get; private set; }
+    [field:SerializeField] public float DashDuration { get; private set; }
+    // CustomAttack
+    [field:SerializeField] public float AttackDuration { get; private set; }
+    [field:SerializeField] public Vector2[] AttackVelocity { get; private set; }
+    [field:SerializeField] public float AttackTimeReset { get; private set; }
+    // TODO: temp, nên chuyển sang scripts khaác
+    
     [SerializeField] float checkDistance;
     [SerializeField] float wallCheckDistance;
     public float InAirMoveMultiplier = 0.8f;
     public float InWallSlideMultiplier = 0.8f;
     public bool IsOnGround {get; private set;}
     public bool IsOnWall {get; private set;}
-    public float IsFacingWall = 1;
+    public float IsFacingWall { get; private set; } = 1;
     bool isFacingRight = true;
+
+    void Update()
+    {
+        GroundCheck();
+        WallCheck();
+    }
+
+
     public void SetVelocity(float xVelocity,float yVelocity)
     {
         rigi.linearVelocity = new Vector2(xVelocity,yVelocity);
@@ -51,6 +69,5 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawRay(this.transform.position,Vector2.down*checkDistance);
         Gizmos.DrawRay(this.transform.position,transform.right*wallCheckDistance);
     }
-
-
+    
 }
