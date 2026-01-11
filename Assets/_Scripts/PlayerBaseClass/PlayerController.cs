@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("Reference")]
     [field: SerializeField] public Animator animator { get; private set; }
     [field: SerializeField] public PlayerMovement Movement { get; private set; }
-    
+    [field: SerializeField] public PlayerAttack AttackController { get; private set; }
     public Player_InputTesst input { get; private set; }
     public StateMachine state;
     public PlayerJumpState JumpState { get; private set; }
@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public PlayerDashState DashState { get; private set; }
     public PlayerDashEndState DashEndState { get; private set; }
     public PlayerAttackState AttackState { get; private set; }
+    public PlayerJumpAttack JumpAttack { get; private set; }
     public Vector2 MovementInput { get; private set; }
     void Awake()
     {
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         DashState = new PlayerDashState(this, state, "Dash");
         DashEndState = new PlayerDashEndState(this, state, "DashEnd");
         AttackState = new PlayerAttackState(this, state, "BaseAttack");
+        JumpAttack = new PlayerJumpAttack(this, state, "JumpAttack");
     }
 
     void OnEnable()

@@ -6,6 +6,7 @@ public class PlayerAttackState : PlayerState
     private float TimeCountDown;
     private int currentIndex = 0;
     private int IndexLimit = 3;
+    private bool comboAttackQueue = false;
     public PlayerAttackState(PlayerController _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
     {
     }
@@ -13,6 +14,7 @@ public class PlayerAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        comboAttackQueue = false;
         HandleIndex();
         ApplyAttackVelocity();
     }
@@ -21,9 +23,20 @@ public class PlayerAttackState : PlayerState
     {
         base.Update();
         HandleAttack();
+        
+        if (input.Player.Attack.WasPressedThisFrame())
+        {
+            if(currentIndex < IndexLimit ) comboAttackQueue = true;
+        }
+        
         if (IsAnimationDone)
         {
-            state.ChangeState(player.GroundedState);
+            if (comboAttackQueue == true)
+            {
+                animator.SetBool(animationName,false);
+                player.AttackController.EnterAttackWithoutDelay(state,player.AttackState);
+            }
+            else state.ChangeState(player.GroundedState);
             return;
         }
     }
@@ -36,14 +49,18 @@ public class PlayerAttackState : PlayerState
 
     private void ApplyAttackVelocity()
     {
-        attackTimer = movement.AttackDuration;
-        movement.SetVelocity(movement.AttackVelocity[currentIndex-1].x * movement.IsFacingWall,movement.AttackVelocity[currentIndex-1].y);
+        attackTimer = player.AttackController.AttackDuration;
+        movement.HandleFlip(player.MovementInput.x);
+        movement.SetVelocity(player.AttackController.AttackVelocity[currentIndex-1].x * movement.FacingDirection,player.AttackController.AttackVelocity[currentIndex-1].y);
     }
 
     private void HandleIndex()
     {
         currentIndex++;
-        if (currentIndex > IndexLimit || Time.time > TimeCountDown + movement.AttackTimeReset) currentIndex = 1;
+        if (currentIndex > IndexLimit || Time.time > TimeCountDown + player.AttackController.AttackTimeReset)
+        {
+            currentIndex = 1;
+        }
         animator.SetInteger("BaseAttackIndex",currentIndex);
     }
 

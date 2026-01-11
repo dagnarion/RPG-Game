@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerFallState : PlayerState
 {
-
+    private float fallSpeed;
     public PlayerFallState(PlayerController _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
     {
     }
@@ -12,7 +12,15 @@ public class PlayerFallState : PlayerState
         base.Update();
         movement.HandleFlip(player.MovementInput.x);
         animator.SetFloat("yVelocity",rigi.linearVelocityY);
-        if(player.MovementInput.x != 0) movement.SetVelocity(movement.Speed * player.MovementInput.x * movement.InAirMoveMultiplier, rigi.linearVelocityY);
+        fallSpeed = Mathf.Clamp(rigi.linearVelocityY,movement.MaxFallSpeed,float.MaxValue);
+        
+        if(player.MovementInput.x != 0) movement.SetVelocity(movement.Speed * player.MovementInput.x * movement.InAirMoveMultiplier,fallSpeed);
+        
+        if (input.Player.Attack.WasPressedThisFrame())
+        {
+            state.ChangeState(player.JumpAttack);
+            return;
+        }
         if(movement.IsOnGround)
         {
             state.ChangeState(player.GroundedState);

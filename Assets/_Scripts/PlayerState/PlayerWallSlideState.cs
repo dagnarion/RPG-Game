@@ -19,7 +19,7 @@ public class PlayerWallSlideState : PlayerState
         if(movement.IsOnGround)
         {
             state.ChangeState(player.GroundedState);
-            movement.HandleFlip(-movement.IsFacingWall);
+            movement.HandleFlip(-movement.FacingDirection);
             return;
         }
         if(!movement.IsOnWall)
