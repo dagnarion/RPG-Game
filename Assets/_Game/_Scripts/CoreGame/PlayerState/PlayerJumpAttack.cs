@@ -11,7 +11,7 @@ public class PlayerJumpAttack : PlayerState
     {
         base.Enter();
         IsOnGround = false;
-        movement.SetVelocity(player.AttackController.JumpAttackVelocity.x * movement.FacingDirection,player.AttackController.JumpAttackVelocity.y);
+        movement.SetVelocity(player.AttackController.JumpAttackVelocity.x * movement.Flip.FacingDirection,player.AttackController.JumpAttackVelocity.y);
     }
 
     public override void Update()

@@ -16,7 +16,7 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
-        movement.HandleFlip(player.MovementInput.x);
+        movement.Flip.HandleFlip(player.MovementInput.x);
         if(!movement.IsOnWall) animator.SetFloat("xVelocity",player.MovementInput.x);
         else animator.SetFloat("xVelocity",0);
         movement.SetVelocity(movement.Speed * player.MovementInput.x,rigi.linearVelocityY);

@@ -50,8 +50,8 @@ public class PlayerAttackState : PlayerState
     private void ApplyAttackVelocity()
     {
         attackTimer = player.AttackController.AttackDuration;
-        movement.HandleFlip(player.MovementInput.x);
-        movement.SetVelocity(player.AttackController.AttackVelocity[currentIndex-1].x * movement.FacingDirection,player.AttackController.AttackVelocity[currentIndex-1].y);
+        movement.Flip.HandleFlip(player.MovementInput.x);
+        movement.SetVelocity(player.AttackController.AttackVelocity[currentIndex-1].x * movement.Flip.FacingDirection,player.AttackController.AttackVelocity[currentIndex-1].y);
     }
 
     private void HandleIndex()

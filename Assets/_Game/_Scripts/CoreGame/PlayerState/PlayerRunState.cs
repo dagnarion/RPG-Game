@@ -19,7 +19,6 @@ public class PlayerRunState : PlayerState
         //     return;
         // }
         player.Movement.SetVelocity(player.Movement.Speed * player.MovementInput.x, rigi.linearVelocity.y);
-        player.Movement.HandleFlip(player.MovementInput.x);
     }
 
     public override void Exit()

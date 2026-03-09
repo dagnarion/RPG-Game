@@ -1,13 +1,18 @@
-using TreeEditor;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour,IAttackable
 {
-    [Header("Reference")]
+    [Header("CONFIG")] 
+    [SerializeField] private float maxHp;
+    [Header("Reference")] 
+    [SerializeField] private SelectCombatMode combatMode;
     [field: SerializeField] public Animator animator { get; private set; }
     [field: SerializeField] public PlayerMovement Movement { get; private set; }
     [field: SerializeField] public PlayerAttack AttackController { get; private set; }
+    [SerializeField] private AnimationTrigger trigger;
+    [SerializeField] private HealthSystem HealthSystem;
+    private AnimationTriggerHandler triggerHandler;
     public Player_InputTesst input { get; private set; }
     public StateMachine state;
     public PlayerJumpState JumpState { get; private set; }
@@ -34,6 +39,10 @@ public class PlayerController : MonoBehaviour
         DashEndState = new PlayerDashEndState(this, state, "DashEnd");
         AttackState = new PlayerAttackState(this, state, "BaseAttack");
         JumpAttack = new PlayerJumpAttack(this, state, "JumpAttack");
+        triggerHandler = new AnimationTriggerHandler(state);
+        combatMode.SetCombatMode(CombatMode.MeleeCombat);
+        trigger.Init(triggerHandler,combatMode.GetCurrentCombatMode());
+        HealthSystem.Init(maxHp);
     }
 
     void OnEnable()
@@ -41,10 +50,13 @@ public class PlayerController : MonoBehaviour
         input.Enable();
         input.Player.Movement.performed += ctx => MovementInput = ctx.ReadValue<Vector2>();
         input.Player.Movement.canceled += ctx => MovementInput = Vector2.zero;
+        HealthSystem.OnDeadEvent += DeadHandler;
+        HealthSystem.Reborn();
     }
     void OnDisable()
     {
         input.Disable();
+        HealthSystem.OnDeadEvent -= DeadHandler;
     }
 
     void Start()
@@ -56,10 +68,16 @@ public class PlayerController : MonoBehaviour
     {
         state.UpdateActiveState();
     }
-
-    public void CompleteAnimation()
+    
+    public void TakeDamage(float amount)
     {
-        PlayerState playerState = (PlayerState) state.currentState;
-        playerState.CompleteAnimation();
+        HealthSystem.Detuc(amount);
+    }
+
+    private void DeadHandler(object sender, EventArgs e)
+    {
+        //anim.SetTrigger("Die"); 
+        GetComponent<Collider2D>().enabled = false;
+        this.enabled = false;
     }
 }

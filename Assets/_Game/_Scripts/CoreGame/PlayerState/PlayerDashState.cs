@@ -16,13 +16,13 @@ public class PlayerDashState : PlayerState
         animator.SetFloat("DashValue",0);
         originGravityScale = rigi.gravityScale;
         rigi.gravityScale = 0;
-        movement.HandleFlip(player.MovementInput.x);
+        movement.Flip.HandleFlip(player.MovementInput.x);
         timeCount.ResetCountdown();
     }
 
     public override void Update()
     {
-        movement.SetVelocity(movement.DashForce * movement.Speed * movement.FacingDirection,0);
+        movement.SetVelocity(movement.DashForce * movement.Speed * movement.Flip.FacingDirection,0);
         if (movement.IsOnWall)
         {   
             if(!movement.IsOnGround)  state.ChangeState(player.WallSlideState);

@@ -12,15 +12,15 @@ public class PlayerWallJumpState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        movement.SetVelocity(movement.WallJumpForce.x * -movement.FacingDirection,movement.WallJumpForce.y);
-        movement.HandleFlip(-movement.FacingDirection);
+        movement.SetVelocity(movement.WallJumpForce.x * -movement.Flip.FacingDirection,movement.WallJumpForce.y);
+        movement.Flip.HandleFlip(-movement.Flip.FacingDirection);
         timeCount.ResetCountdown();
     }
 
     public override void Update()
     {
         base.Update();
-        movement.HandleFlip(player.MovementInput.x);
+        movement.Flip.HandleFlip(player.MovementInput.x);
         if (input.Player.Attack.WasPressedThisFrame())
         {
             state.ChangeState(player.JumpAttack);

@@ -10,7 +10,7 @@ public class PlayerFallState : PlayerState
     public override void Update()
     {
         base.Update();
-        movement.HandleFlip(player.MovementInput.x);
+        movement.Flip.HandleFlip(player.MovementInput.x);
         animator.SetFloat("yVelocity",rigi.linearVelocityY);
         fallSpeed = Mathf.Clamp(rigi.linearVelocityY,movement.MaxFallSpeed,float.MaxValue);
         
