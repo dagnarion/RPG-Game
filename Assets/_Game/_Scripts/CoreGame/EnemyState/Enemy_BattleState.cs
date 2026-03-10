@@ -11,14 +11,15 @@ public class Enemy_BattleState : EnemyState
     public override void Enter()
     {
         base.Enter();
-       if(_controller.Detecting.IsTargetOnChaseDetection() !=null) player = _controller.Detecting.IsTargetOnChaseDetection().transform;
+       if(_controller.Detecting.IsTargetOnChaseDetection()) player = _controller.Detecting.IsTargetOnChaseDetection().transform;
+       if(_movement.FlipHandler.FacingDirection != DirectionToPlayer())  _movement.FlipHandler.HandleFlip(-_movement.FlipHandler.FacingDirection);
     }
 
     public override void Update()
     {
         base.Update();
-        if (_controller.Detecting.IsTargetOnChaseDetection() == null || _controller.movement.IsOnWall)
-        {
+        if (!_controller.Detecting.IsTargetOnChaseDetection() || _controller.movement.IsOnWall)
+        { 
             _stateMachine.ChangeState(_controller.RunState);
             return;
         }
@@ -29,7 +30,6 @@ public class Enemy_BattleState : EnemyState
         if (_controller.Detecting.CanRetreat())
         {
             _movement.SetVelocity(_movement.RetreatVelocity.x * -DirectionToPlayer(),_movement.RetreatVelocity.y);
-            Debug.Log("Retreat");
         }
         
         if (_controller.Detecting.CanAttack() && !_controller.Detecting.CanRetreat())

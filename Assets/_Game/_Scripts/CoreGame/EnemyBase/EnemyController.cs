@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour,IAttackable
 {
+    [Header("CONFIG")]
     [SerializeField] private float maxHp;
+    [field: SerializeField] public float AnimationTransitionTime { get; private set; }
+    [Header("REFERENCE")]
     [field:SerializeField] public Animator animator { get; private set; }
     [field:SerializeField] public EnemyMovement movement { get; private set; }
     [field:SerializeField] public EnemyDetecting Detecting { get; private set; }
@@ -11,12 +14,14 @@ public class EnemyController : MonoBehaviour,IAttackable
     [SerializeField] private AnimationTrigger trigger;
     [SerializeField] private AnimationTriggerHandler triggerHandler;
     [SerializeField] private HealthSystem healthSystem;
+    [SerializeField] private VFXSelect _vfxSelect;
     public Enemy_IdleState IdleState { get; private set; }
     public Enemy_RunState RunState { get; private set; }
     public Enemy_AttackState AttackState { get; private set; }
     public Enemy_BattleState BattleState { get; private set; }
     public Enemy_DeadState DeadState { get; private set; }
     public StateMachine StateMachine { get; private set; }
+    private IVFX onDamageVFX;
     private void Awake()
     {
         StateMachine = new StateMachine();
@@ -29,6 +34,7 @@ public class EnemyController : MonoBehaviour,IAttackable
         CombatMode.SetCombatMode(global::CombatMode.MeleeCombat);
         trigger.Init(triggerHandler,CombatMode.GetCurrentCombatMode());
         healthSystem.Init(maxHp);
+        onDamageVFX = _vfxSelect.Create(VFXType.DamageVFX);
     }
 
     private void OnEnable()
@@ -54,6 +60,9 @@ public class EnemyController : MonoBehaviour,IAttackable
     public void TakeDamage(float amount)
     {
         healthSystem.Detuc(amount);
+        onDamageVFX.ApplyEffect(this.gameObject,0.2f);
+     if(!healthSystem.IsDead())   StateMachine.ChangeState(BattleState);
+    
     }
     
     

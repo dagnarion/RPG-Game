@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour,IAttackable
     [field: SerializeField] public PlayerAttack AttackController { get; private set; }
     [SerializeField] private AnimationTrigger trigger;
     [SerializeField] private HealthSystem HealthSystem;
+    [SerializeField] private VFXSelect _vfxSelect;
     private AnimationTriggerHandler triggerHandler;
     public Player_InputTesst input { get; private set; }
     public StateMachine state;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour,IAttackable
     public PlayerAttackState AttackState { get; private set; }
     public PlayerJumpAttack JumpAttack { get; private set; }
     public Vector2 MovementInput { get; private set; }
+    private IVFX onDamageVFX;
     void Awake()
     {
         input = new Player_InputTesst();
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour,IAttackable
         combatMode.SetCombatMode(CombatMode.MeleeCombat);
         trigger.Init(triggerHandler,combatMode.GetCurrentCombatMode());
         HealthSystem.Init(maxHp);
+        onDamageVFX = _vfxSelect.Create(VFXType.DamageVFX);
     }
 
     void OnEnable()
@@ -72,6 +75,7 @@ public class PlayerController : MonoBehaviour,IAttackable
     public void TakeDamage(float amount)
     {
         HealthSystem.Detuc(amount);
+        onDamageVFX.ApplyEffect(this.gameObject,0.2f);
     }
 
     private void DeadHandler(object sender, EventArgs e)

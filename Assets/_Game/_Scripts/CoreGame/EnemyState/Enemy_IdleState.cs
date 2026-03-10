@@ -1,8 +1,8 @@
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class Enemy_IdleState : EnemyState
 {
+    private float timer;
     public Enemy_IdleState(EnemyController controller, EnemyMovement movement, StateMachine _state, string _animationName) : base(controller, movement, _state, _animationName)
     {
     }
@@ -16,7 +16,12 @@ public class Enemy_IdleState : EnemyState
     public override void Update()
     {
         base.Update();
-        if (_controller.Detecting.IsTargetOnChaseDetection() != null && !_movement.IsOnWall)
+        if (_movement.IsOnWall)
+        {
+            timer = Time.time + _controller.AnimationTransitionTime;
+        }
+        
+        if (_controller.Detecting.IsTargetOnChaseDetection() && Time.time > timer)
         {
             _stateMachine.ChangeState(_controller.BattleState);
             return;
