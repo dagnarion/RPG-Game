@@ -17,6 +17,12 @@ public abstract class PlayerState : EntityState
     
     public override void Update()
     {
+        if (player.IsAttacked)
+        {
+            state.ChangeState(player.OnDamageState);
+            return;
+        }
+        
         if (CanDash() && input.Player.Dash.WasPressedThisFrame())
         {
             state.ChangeState(player.DashState);

@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class MeleeCombat : MonoBehaviour, ICombat
 {
-    [Header("CONFIG")] [SerializeField] private float damage;
+    [Header("CONFIG")] 
+    [SerializeField] private HitData damageData;
     [SerializeField] private float attackRadius;
     [SerializeField] LayerMask whatIsTarget;
     [Header("REFERENCE")] [SerializeField] private Transform attackPoint;
@@ -16,7 +17,7 @@ public class MeleeCombat : MonoBehaviour, ICombat
         {
             if (entity.TryGetComponent<IAttackable>(out var attackable))
             {
-                attackable.TakeDamage(damage);
+                attackable.TakeDamage(damageData);
             }
         }
     }

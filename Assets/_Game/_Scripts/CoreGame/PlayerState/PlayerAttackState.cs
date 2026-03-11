@@ -69,7 +69,7 @@ public class PlayerAttackState : PlayerState
         attackTimer -= Time.deltaTime;
         if (attackTimer < 0)
         {
-            movement.SetVelocity(0,rigi.linearVelocityY);
+         if(!player.IsAttacked) movement.SetVelocity(0,rigi.linearVelocityY);
             return;
         }
     }

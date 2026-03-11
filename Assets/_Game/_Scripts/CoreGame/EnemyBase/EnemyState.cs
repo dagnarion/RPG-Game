@@ -25,5 +25,10 @@ public class EnemyState : EntityState
     public override void Update()
     {
         stateTimer -= Time.deltaTime;
+        if (_controller.IsAttacked)
+        {
+            state.ChangeState(_controller.OnDamageState);
+            return;
+        }
     }
 }

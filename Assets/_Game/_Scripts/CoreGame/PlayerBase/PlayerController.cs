@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class PlayerController : MonoBehaviour,IAttackable
 {
@@ -25,8 +28,11 @@ public class PlayerController : MonoBehaviour,IAttackable
     public PlayerDashEndState DashEndState { get; private set; }
     public PlayerAttackState AttackState { get; private set; }
     public PlayerJumpAttack JumpAttack { get; private set; }
+    public PlayerOnDamageState OnDamageState { get; private set; }
     public Vector2 MovementInput { get; private set; }
     private IVFX onDamageVFX;
+    private Coroutine knockBackCo;
+    public bool IsAttacked { get; private set; }
     void Awake()
     {
         input = new Player_InputTesst();
@@ -41,11 +47,11 @@ public class PlayerController : MonoBehaviour,IAttackable
         DashEndState = new PlayerDashEndState(this, state, "DashEnd");
         AttackState = new PlayerAttackState(this, state, "BaseAttack");
         JumpAttack = new PlayerJumpAttack(this, state, "JumpAttack");
+        OnDamageState = new PlayerOnDamageState(this, state, "OnDamage");
         triggerHandler = new AnimationTriggerHandler(state);
         combatMode.SetCombatMode(CombatMode.MeleeCombat);
         trigger.Init(triggerHandler,combatMode.GetCurrentCombatMode());
         HealthSystem.Init(maxHp);
-        onDamageVFX = _vfxSelect.Create(VFXType.DamageVFX);
     }
 
     void OnEnable()
@@ -65,6 +71,7 @@ public class PlayerController : MonoBehaviour,IAttackable
     void Start()
     {
         state.Initialize(GroundedState);
+        onDamageVFX = _vfxSelect.Create(VFXType.DamageVFX);
     }
 
     void Update()
@@ -72,15 +79,39 @@ public class PlayerController : MonoBehaviour,IAttackable
         state.UpdateActiveState();
     }
     
-    public void TakeDamage(float amount)
+    public void TakeDamage(HitData hit)
     {
-        HealthSystem.Detuc(amount);
-        onDamageVFX.ApplyEffect(this.gameObject,0.2f);
+        if(HealthSystem.IsDead()) return;
+        HealthSystem.Detuc(hit.Damage);
+        onDamageVFX?.ApplyEffect(this.gameObject,0.2f);
+        TakeKnockback(hit);
     }
 
+    private void TakeKnockback(HitData hit)
+    {
+        int direction = (transform.position.x > hit.Sender.position.x) ? 1 : -1;
+        Vector2 knockBackVel = hit.KnockBackForce;
+        knockBackVel.x = hit.KnockBackForce.x * direction;
+        if (knockBackCo != null)
+        {
+            StopCoroutine(knockBackCo);
+        }
+        knockBackCo = StartCoroutine(KnockBack(knockBackVel,hit.KnockBackDuration));
+    }
+
+    IEnumerator KnockBack(Vector2 knockbackForce,float duration)
+    {
+        IsAttacked = true;
+        Movement.SetVelocity(knockbackForce.x,knockbackForce.y);
+        yield return new WaitForSeconds(duration);
+        Movement.SetVelocity(Movement.rigi.linearVelocityX*0.5f,0);
+        IsAttacked = false;
+    }
+    
     private void DeadHandler(object sender, EventArgs e)
     {
         //anim.SetTrigger("Die"); 
+        IsAttacked = false;
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
     }

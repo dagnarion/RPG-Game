@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour,IAttackable
@@ -20,8 +21,11 @@ public class EnemyController : MonoBehaviour,IAttackable
     public Enemy_AttackState AttackState { get; private set; }
     public Enemy_BattleState BattleState { get; private set; }
     public Enemy_DeadState DeadState { get; private set; }
+    public Enemy_OnDamageState OnDamageState { get; private set; }
     public StateMachine StateMachine { get; private set; }
     private IVFX onDamageVFX;
+    [field:SerializeField] public bool IsAttacked { get; private set; }
+    private Coroutine knockBackCo;
     private void Awake()
     {
         StateMachine = new StateMachine();
@@ -30,6 +34,7 @@ public class EnemyController : MonoBehaviour,IAttackable
         AttackState = new Enemy_AttackState(this,movement, StateMachine, "Attack");
         BattleState = new Enemy_BattleState(this, movement, StateMachine, "Battle");
         DeadState = new Enemy_DeadState(this, movement, StateMachine, "Dead");
+        OnDamageState = new Enemy_OnDamageState(this, movement, StateMachine, "OnDamage");
         triggerHandler = new AnimationTriggerHandler(StateMachine);
         CombatMode.SetCombatMode(global::CombatMode.MeleeCombat);
         trigger.Init(triggerHandler,CombatMode.GetCurrentCombatMode());
@@ -57,12 +62,33 @@ public class EnemyController : MonoBehaviour,IAttackable
         StateMachine.UpdateActiveState();
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(HitData hit)
     {
-        healthSystem.Detuc(amount);
+        if(healthSystem.IsDead()) return;
+        healthSystem.Detuc(hit.Damage);
         onDamageVFX.ApplyEffect(this.gameObject,0.2f);
-     if(!healthSystem.IsDead())   StateMachine.ChangeState(BattleState);
+        TakeKnockback(hit);
+    }
     
+    private void TakeKnockback(HitData hit)
+    {
+        int direction = (transform.position.x > hit.Sender.position.x) ? 1 : -1;
+        Vector2 knockBackVel = hit.KnockBackForce;
+        knockBackVel.x = hit.KnockBackForce.x * direction;
+        if (knockBackCo != null)
+        {
+            StopCoroutine(knockBackCo);
+        }
+        knockBackCo = StartCoroutine(KnockBack(knockBackVel,hit.KnockBackDuration));
+    }
+
+    IEnumerator KnockBack(Vector2 knockbackForce,float duration)
+    {
+        IsAttacked = true;
+        movement.SetVelocity(knockbackForce.x,knockbackForce.y);
+        yield return new WaitForSeconds(duration); 
+        movement.SetVelocity(movement.rigi.linearVelocityX*0.5f,0);
+        IsAttacked = false;
     }
     
     
