@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour,IAttackable
     public PlayerAttackState AttackState { get; private set; }
     public PlayerJumpAttack JumpAttack { get; private set; }
     public PlayerOnDamageState OnDamageState { get; private set; }
+    public PlayerDeadState DeadState { get; private set; }
     public Vector2 MovementInput { get; private set; }
     private IVFX onDamageVFX;
     private Coroutine knockBackCo;
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour,IAttackable
         AttackState = new PlayerAttackState(this, state, "BaseAttack");
         JumpAttack = new PlayerJumpAttack(this, state, "JumpAttack");
         OnDamageState = new PlayerOnDamageState(this, state, "OnDamage");
+        DeadState = new PlayerDeadState(this, state, "Dead");
         triggerHandler = new AnimationTriggerHandler(state);
         combatMode.SetCombatMode(CombatMode.MeleeCombat);
         trigger.Init(triggerHandler,combatMode.GetCurrentCombatMode());
@@ -111,8 +113,10 @@ public class PlayerController : MonoBehaviour,IAttackable
     private void DeadHandler(object sender, EventArgs e)
     {
         //anim.SetTrigger("Die"); 
+        state.ChangeState(DeadState);
         IsAttacked = false;
         GetComponent<Collider2D>().enabled = false;
+        Movement.rigi.simulated = false;
         this.enabled = false;
     }
 }

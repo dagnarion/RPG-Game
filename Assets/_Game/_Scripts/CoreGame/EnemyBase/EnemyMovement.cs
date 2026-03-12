@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyMovement : BaseMovement
@@ -8,8 +9,11 @@ public class EnemyMovement : BaseMovement
     [field: SerializeField] public float ChaseSpeed { get; private set; }
     [field:SerializeField] public float AnimationSpeedMultiphyler { get; private set; }
     [field:SerializeField] public Vector2 RetreatVelocity { get; private set; }
+    [field:SerializeField] public Vector2 deadVelocity { get; private set; }
+    [SerializeField] private float deadDuration;
     public FlipObject FlipHandler { get; private set; }
-
+    private Coroutine deadDelay;
+    
     private void Awake()
     {
         FlipHandler = new FlipObject(this.transform);
@@ -23,6 +27,7 @@ public class EnemyMovement : BaseMovement
 
     public void OnDeadHandler(object sender,EventArgs eventArgs)
     {
-        rigi.simulated = false;
+        this.GetComponent<Collider2D>().enabled = false;
     }
+    
 }

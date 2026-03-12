@@ -227,8 +227,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -852092673
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7928858964255100155, guid: b8f1bd1be2e585246ae45ef98df53e58, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7f3da53cfdc9949ad859606e3ea6c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 10
+  maxHp: 3
   combatMode: {fileID: 305037926}
   <animator>k__BackingField: {fileID: 1553392036}
   <Movement>k__BackingField: {fileID: 305037923}
@@ -448,7 +448,7 @@ MonoBehaviour:
   <AttackDuration>k__BackingField: 0.25
   <AttackTimeReset>k__BackingField: 0.25
   <AttackVelocity>k__BackingField:
-  - {x: 3, y: 3}
+  - {x: 2, y: 3}
   - {x: 2.5, y: 2}
   - {x: 5, y: 5}
   <JumpAttackVelocity>k__BackingField: {x: 5, y: -6}
@@ -464,8 +464,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98393752adb601f41876a80eed2a4326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  attackRadius: 0.72
+  damageData:
+    <Sender>k__BackingField: {fileID: 305037921}
+    <Damage>k__BackingField: 1
+    <KnockBackForce>k__BackingField: {x: 3, y: 1.5}
+    <KnockBackDuration>k__BackingField: 0.05
+  attackRadius: 0.9
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
@@ -1047,7 +1051,7 @@ Transform:
   m_GameObject: {fileID: 787428176}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.539, y: 0, z: 0}
+  m_LocalPosition: {x: 1.117, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6590,6 +6594,8 @@ MonoBehaviour:
   <ChaseSpeed>k__BackingField: 2
   <AnimationSpeedMultiphyler>k__BackingField: 1
   <RetreatVelocity>k__BackingField: {x: 5, y: 0.5}
+  <deadVelocity>k__BackingField: {x: 5, y: 15}
+  deadDuration: 2
 --- !u!114 &1016853323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6602,7 +6608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d794ab72bedbe34fba32073d1659ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 5
+  maxHp: 3
   <AnimationTransitionTime>k__BackingField: 0.5
   <animator>k__BackingField: {fileID: 65723384}
   <movement>k__BackingField: {fileID: 1016853322}
@@ -6611,6 +6617,8 @@ MonoBehaviour:
   trigger: {fileID: 65723385}
   healthSystem: {fileID: 1016853328}
   _vfxSelect: {fileID: 724119764}
+  <IsAttacked>k__BackingField: 0
+  <sendered>k__BackingField: {fileID: 0}
 --- !u!4 &1016853324
 Transform:
   m_ObjectHideFlags: 0
@@ -6682,8 +6690,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98393752adb601f41876a80eed2a4326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  attackRadius: 0.71
+  damageData:
+    <Sender>k__BackingField: {fileID: 1016853324}
+    <Damage>k__BackingField: 1
+    <KnockBackForce>k__BackingField: {x: 1.5, y: 2.5}
+    <KnockBackDuration>k__BackingField: 0.2
+  attackRadius: 0.95
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256
@@ -6889,7 +6901,7 @@ Transform:
   m_GameObject: {fileID: 1297932438}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.428, y: 0, z: 0}
+  m_LocalPosition: {x: 0.204, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7024,7 +7036,7 @@ Transform:
   m_GameObject: {fileID: 1349321158}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.034, y: 0, z: 0}
+  m_LocalPosition: {x: 1.034, y: -0.367, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7291,7 +7303,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -852092673
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1459458051413904079, guid: 0878f5ddb5042c44aadaddc2c4037147, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

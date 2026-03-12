@@ -11,7 +11,9 @@ public class Enemy_BattleState : EnemyState
     public override void Enter()
     {
         base.Enter();
-       if(_controller.Detecting.IsTargetOnChaseDetection()) player = _controller.Detecting.IsTargetOnChaseDetection().transform;
+        if(_controller!=null) player = _controller.sendered;
+        if (_controller.Detecting.IsTargetOnChaseDetection())
+            player = _controller.Detecting.IsTargetOnChaseDetection().transform;
        if(_movement.FlipHandler.FacingDirection != DirectionToPlayer())  _movement.FlipHandler.HandleFlip(-_movement.FlipHandler.FacingDirection);
     }
 

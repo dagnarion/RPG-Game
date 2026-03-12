@@ -25,19 +25,15 @@ public class HealthSystem : MonoBehaviour
     {
         if(IsDead()) return;
         currentHp = Mathf.Clamp(currentHp - amount, 0, maxHp);
+        if (currentHp <= 0)
+        {
+            OnDeadEvent?.Invoke(this,EventArgs.Empty);
+            return;
+        }
         HealthChangeEvent?.Invoke(this,EventArgs.Empty);
     }
 
-    public bool IsDead()
-    {
-        if (CheckingIfDeadOrNo == false && currentHp <= 0)
-        {
-            OnDeadEvent?.Invoke(this,EventArgs.Empty);
-            CheckingIfDeadOrNo = true;
-        }
-        return currentHp <= 0;
-    }
-
+    public bool IsDead() => currentHp <= 0;
     public float GetHealhAmountNozmalized() => currentHp / maxHp;
 
 }

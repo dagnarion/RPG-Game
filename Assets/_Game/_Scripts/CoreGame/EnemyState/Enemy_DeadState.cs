@@ -8,9 +8,13 @@ public class Enemy_DeadState : EnemyState
 
     public override void Enter()
     {
-        animator.SetTrigger(animationName);
+        animator.enabled = false;
+        _movement.SetVelocity(rigi.linearVelocity.x,_movement.deadVelocity.y);
+        rigi.gravityScale = 10;
     }
-    
-    
-    
+
+    public override void Update()
+    {
+        
+    }
 }

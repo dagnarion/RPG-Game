@@ -12,6 +12,7 @@ public class EnemyState : EntityState
         animator = _controller.animator;
         _movement = movement;
         _stateMachine = controller.StateMachine;
+        rigi = _movement.rigi;
     }
 
     public override void Enter()
