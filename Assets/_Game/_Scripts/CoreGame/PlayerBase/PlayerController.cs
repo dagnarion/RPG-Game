@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour,IAttackable
     [field: SerializeField] public Animator animator { get; private set; }
     [field: SerializeField] public PlayerMovement Movement { get; private set; }
     [field: SerializeField] public PlayerAttack AttackController { get; private set; }
+    [SerializeField] private PlayerInteract _interact;
     [SerializeField] private AnimationTrigger trigger;
     [SerializeField] private HealthSystem HealthSystem;
     [SerializeField] private VFXSelect _vfxSelect;
@@ -79,6 +80,10 @@ public class PlayerController : MonoBehaviour,IAttackable
     void Update()
     {
         state.UpdateActiveState();
+        if (input.Player.Interact.WasPressedThisFrame())
+        {
+            _interact.Interact();
+        }
     }
     
     public void TakeDamage(HitData hit)

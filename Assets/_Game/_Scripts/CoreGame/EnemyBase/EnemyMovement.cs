@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyMovement : BaseMovement
 {
@@ -28,6 +29,10 @@ public class EnemyMovement : BaseMovement
     public void OnDeadHandler(object sender,EventArgs eventArgs)
     {
         this.GetComponent<Collider2D>().enabled = false;
+        rigi.freezeRotation = false;
+        SetVelocity(rigi.linearVelocityX,deadVelocity.y);
+        rigi.gravityScale = 10;
+        rigi.angularVelocity = Random.Range(-200f, 200f);
     }
     
 }

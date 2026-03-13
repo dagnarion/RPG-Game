@@ -14,7 +14,7 @@ TagManager:
   - Ground
   - Enemy
   - Player
-  - 
+  - Interactable
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 3481291357
+    locked: 0
+  - name: Interact
+    uniqueID: 3818275025
     locked: 0
   - name: Entity
     uniqueID: 3442874623

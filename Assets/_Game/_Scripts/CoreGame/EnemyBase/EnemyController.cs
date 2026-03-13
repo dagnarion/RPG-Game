@@ -42,6 +42,10 @@ public class EnemyController : MonoBehaviour, IAttackable
         CombatMode.SetCombatMode(global::CombatMode.MeleeCombat);
         trigger.Init(triggerHandler, CombatMode.GetCurrentCombatMode());
         healthSystem.Init(maxHp);
+    }
+
+    private void Start()
+    {
         onDamageVFX = _vfxSelect.Create(VFXType.DamageVFX);
     }
 
@@ -61,7 +65,6 @@ public class EnemyController : MonoBehaviour, IAttackable
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F)) StateMachine.ChangeState(AttackState);
         StateMachine.UpdateActiveState();
     }
 
