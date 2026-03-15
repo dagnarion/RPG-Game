@@ -9,8 +9,10 @@ public class EnemyMovement : BaseMovement
     [field: SerializeField] public float MoveSpeed { get; private set; }
     [field: SerializeField] public float ChaseSpeed { get; private set; }
     [field:SerializeField] public float AnimationSpeedMultiphyler { get; private set; }
+    [field:SerializeField] public float StunnTime { get; private set; }
     [field:SerializeField] public Vector2 RetreatVelocity { get; private set; }
     [field:SerializeField] public Vector2 deadVelocity { get; private set; }
+    [field:SerializeField] public Vector2 StunnedVelocity { get; private set; }
     [SerializeField] private float deadDuration;
     public FlipObject FlipHandler { get; private set; }
     private Coroutine deadDelay;

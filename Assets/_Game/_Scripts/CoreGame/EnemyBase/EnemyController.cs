@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour, IAttackable
+public class EnemyController : MonoBehaviour, IAttackable , ICounterable
 {
-    [Header("CONFIG")] [SerializeField] private float maxHp;
+    [Header("CONFIG")] 
+    [SerializeField] private float maxHp;
     [field: SerializeField] public float AnimationTransitionTime { get; private set; }
-
+    
     [Header("REFERENCE")]
     [field: SerializeField]
     public Animator animator { get; private set; }
@@ -24,11 +26,13 @@ public class EnemyController : MonoBehaviour, IAttackable
     public Enemy_BattleState BattleState { get; private set; }
     public Enemy_DeadState DeadState { get; private set; }
     public Enemy_OnDamageState OnDamageState { get; private set; }
+    public Enemy_StunnedState StunnedState { get; private set; }
     public StateMachine StateMachine { get; private set; }
     private IVFX onDamageVFX;
     [field: SerializeField] public bool IsAttacked { get; private set; }
     private Coroutine knockBackCo;
-   [field:SerializeField] public Transform sendered { get; private set; }
+    [field:SerializeField] public Transform sendered { get; private set; }
+    public bool CanStunned { get; private set; }
     private void Awake()
     {
         StateMachine = new StateMachine();
@@ -38,6 +42,7 @@ public class EnemyController : MonoBehaviour, IAttackable
         BattleState = new Enemy_BattleState(this, movement, StateMachine, "Battle");
         DeadState = new Enemy_DeadState(this, movement, StateMachine, "Dead");
         OnDamageState = new Enemy_OnDamageState(this, movement, StateMachine, "OnDamage");
+        StunnedState = new Enemy_StunnedState(this, movement, StateMachine, "Stunned");
         triggerHandler = new AnimationTriggerHandler(StateMachine);
         CombatMode.SetCombatMode(global::CombatMode.MeleeCombat);
         trigger.Init(triggerHandler, CombatMode.GetCurrentCombatMode());
@@ -47,6 +52,7 @@ public class EnemyController : MonoBehaviour, IAttackable
     private void Start()
     {
         onDamageVFX = _vfxSelect.Create(VFXType.DamageVFX);
+        CanStunned = false;
     }
 
     private void OnEnable()
@@ -66,7 +72,13 @@ public class EnemyController : MonoBehaviour, IAttackable
     private void Update()
     {
         StateMachine.UpdateActiveState();
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            HandleCounter();
+        }
     }
+
+    public void HandleStunn(bool enable) => CanStunned = enable;
 
     public void TakeDamage(HitData hit)
     {
@@ -103,5 +115,11 @@ public class EnemyController : MonoBehaviour, IAttackable
     {
         StateMachine.ChangeState(DeadState);
         this.enabled = false;
+    }
+
+    public void HandleCounter()
+    {
+       if(!CanStunned) return;
+       StateMachine.ChangeState(StunnedState);
     }
 }

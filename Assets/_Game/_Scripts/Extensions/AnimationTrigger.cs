@@ -20,5 +20,6 @@ public class AnimationTrigger : MonoBehaviour
         combat.Attack();
     }
     
+    
 }
 // test
