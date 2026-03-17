@@ -3,7 +3,7 @@ using UnityEngine;
 public class Enemy_IdleState : EnemyState
 {
     private float timer;
-    public Enemy_IdleState(EnemyController controller, EnemyMovement movement, StateMachine _state, string _animationName) : base(controller, movement, _state, _animationName)
+    public Enemy_IdleState(Enemy controller, EnemyMovement movement, StateMachine _state, string _animationName) : base(controller, movement, _state, _animationName)
     {
     }
 

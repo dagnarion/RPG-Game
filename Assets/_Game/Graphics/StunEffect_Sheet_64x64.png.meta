@@ -1,0 +1,614 @@
+fileFormatVersion: 2
+guid: 94046c516a121c841aabd98cc6e0c108
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1522287180028870417
+    second: StunEffect_Sheet_64x64_0
+  - first:
+      213: 4309122218462826623
+    second: StunEffect_Sheet_64x64_1
+  - first:
+      213: 7429649671465244622
+    second: StunEffect_Sheet_64x64_2
+  - first:
+      213: -6977432011315714063
+    second: StunEffect_Sheet_64x64_3
+  - first:
+      213: 1629445274058666443
+    second: StunEffect_Sheet_64x64_4
+  - first:
+      213: -1338649205393752747
+    second: StunEffect_Sheet_64x64_5
+  - first:
+      213: -9102916945086502788
+    second: StunEffect_Sheet_64x64_6
+  - first:
+      213: 9099269321530973512
+    second: StunEffect_Sheet_64x64_7
+  - first:
+      213: -3148331663998845045
+    second: StunEffect_Sheet_64x64_8
+  - first:
+      213: -3365534607593017142
+    second: StunEffect_Sheet_64x64_9
+  - first:
+      213: -4730131817606694702
+    second: StunEffect_Sheet_64x64_10
+  - first:
+      213: 4539451697935184715
+    second: StunEffect_Sheet_64x64_11
+  - first:
+      213: -1901961982448967742
+    second: StunEffect_Sheet_64x64_12
+  - first:
+      213: -4388030417801386782
+    second: StunEffect_Sheet_64x64_13
+  - first:
+      213: -353044149273520651
+    second: StunEffect_Sheet_64x64_14
+  - first:
+      213: -5608441799935744814
+    second: StunEffect_Sheet_64x64_15
+  - first:
+      213: -8588627020711178922
+    second: StunEffect_Sheet_64x64_16
+  - first:
+      213: -3037848407033135543
+    second: StunEffect_Sheet_64x64_17
+  - first:
+      213: 543816342737972245
+    second: StunEffect_Sheet_64x64_18
+  - first:
+      213: 165697965705947102
+    second: StunEffect_Sheet_64x64_19
+  - first:
+      213: -4869233151681582456
+    second: StunEffect_Sheet_64x64_20
+  - first:
+      213: 3923366886498808849
+    second: StunEffect_Sheet_64x64_21
+  - first:
+      213: -6311436234730009146
+    second: StunEffect_Sheet_64x64_22
+  - first:
+      213: -1838668204716064449
+    second: StunEffect_Sheet_64x64_23
+  - first:
+      213: -2738219325679441609
+    second: StunEffect_Sheet_64x64_24
+  - first:
+      213: 106911878342960020
+    second: StunEffect_Sheet_64x64_25
+  - first:
+      213: -2332371320261940441
+    second: StunEffect_Sheet_64x64_26
+  - first:
+      213: -7890576210805191942
+    second: StunEffect_Sheet_64x64_27
+  - first:
+      213: 4630589586468530723
+    second: StunEffect_Sheet_64x64_28
+  - first:
+      213: -1312563022213352383
+    second: StunEffect_Sheet_64x64_29
+  - first:
+      213: 3652576228531456066
+    second: StunEffect_Sheet_64x64_30
+  - first:
+      213: -3080026028992401533
+    second: StunEffect_Sheet_64x64_31
+  - first:
+      213: 787749172963128448
+    second: StunEffect_Sheet_64x64_32
+  - first:
+      213: 4268342881313399494
+    second: StunEffect_Sheet_64x64_33
+  - first:
+      213: -132606329339363471
+    second: StunEffect_Sheet_64x64_34
+  - first:
+      213: 3063550653432762775
+    second: StunEffect_Sheet_64x64_35
+  - first:
+      213: -4027747135857116115
+    second: StunEffect_Sheet_64x64_36
+  - first:
+      213: 4035115000918630383
+    second: StunEffect_Sheet_64x64_37
+  - first:
+      213: -9166588457359059870
+    second: StunEffect_Sheet_64x64_38
+  - first:
+      213: -8287041074953871401
+    second: StunEffect_Sheet_64x64_39
+  - first:
+      213: -6217061114079123397
+    second: StunEffect_Sheet_64x64_40
+  - first:
+      213: 2678606616109251064
+    second: StunEffect_Sheet_64x64_41
+  - first:
+      213: 3395413596614001667
+    second: StunEffect_Sheet_64x64_42
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe08f3c00efbfdae0800000000000000
+      internalID: -1522287180028870417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f705835b3d31dcb30800000000000000
+      internalID: 4309122218462826623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec79841230b6b1760800000000000000
+      internalID: 7429649671465244622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f76611cd8e2b2f90800000000000000
+      internalID: -6977432011315714063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc1b435f7d3fc9610800000000000000
+      internalID: 1629445274058666443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55d75a1e3a92c6de0800000000000000
+      internalID: -1338649205393752747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_6
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c782c3c8441fba180800000000000000
+      internalID: -9102916945086502788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_7
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84d9679ec39174e70800000000000000
+      internalID: 9099269321530973512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8ffb3c3801ee44d0800000000000000
+      internalID: -3148331663998845045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac072231b183b41d0800000000000000
+      internalID: -3365534607593017142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d8b7c65c223b5eb0800000000000000
+      internalID: -4730131817606694702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b43787aa44f5ffe30800000000000000
+      internalID: 4539451697935184715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cfd4db67afda95e0800000000000000
+      internalID: -1901961982448967742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_13
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e4e65375959a13c0800000000000000
+      internalID: -4388030417801386782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f5958c773cb91bf0800000000000000
+      internalID: -353044149273520651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunEffect_Sheet_64x64_15
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d4a063d5efca22b0800000000000000
+      internalID: -5608441799935744814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 09704bcdf979f6a458ccac1a63a49064
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      StunEffect_Sheet_64x64_0: -1522287180028870417
+      StunEffect_Sheet_64x64_1: 4309122218462826623
+      StunEffect_Sheet_64x64_10: -4730131817606694702
+      StunEffect_Sheet_64x64_11: 4539451697935184715
+      StunEffect_Sheet_64x64_12: -1901961982448967742
+      StunEffect_Sheet_64x64_13: -4388030417801386782
+      StunEffect_Sheet_64x64_14: -353044149273520651
+      StunEffect_Sheet_64x64_15: -5608441799935744814
+      StunEffect_Sheet_64x64_2: 7429649671465244622
+      StunEffect_Sheet_64x64_3: -6977432011315714063
+      StunEffect_Sheet_64x64_4: 1629445274058666443
+      StunEffect_Sheet_64x64_5: -1338649205393752747
+      StunEffect_Sheet_64x64_6: -9102916945086502788
+      StunEffect_Sheet_64x64_7: 9099269321530973512
+      StunEffect_Sheet_64x64_8: -3148331663998845045
+      StunEffect_Sheet_64x64_9: -3365534607593017142
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

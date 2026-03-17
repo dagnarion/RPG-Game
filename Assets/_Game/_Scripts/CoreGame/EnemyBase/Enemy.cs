@@ -3,23 +3,24 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour, IAttackable , ICounterable
+public class Enemy : MonoBehaviour, IAttackable , ICounterable
 {
     [Header("CONFIG")] 
     [SerializeField] private float maxHp;
     [field: SerializeField] public float AnimationTransitionTime { get; private set; }
-    
+    public bool CanStunned { get; private set; }
     [Header("REFERENCE")]
     [field: SerializeField]
     public Animator animator { get; private set; }
-
+    [field:SerializeField] public GameObject AlertPoint { get; private set; }
+    [field:SerializeField] public GameObject StunPoint { get; private set; }
     [field: SerializeField] public EnemyMovement movement { get; private set; }
     [field: SerializeField] public EnemyDetecting Detecting { get; private set; }
     [SerializeField] private SelectCombatMode CombatMode;
     [SerializeField] private AnimationTrigger trigger;
     [SerializeField] private AnimationTriggerHandler triggerHandler;
     [SerializeField] private HealthSystem healthSystem;
-    [SerializeField] private VFXSelect _vfxSelect;
+    [field:SerializeField] public VFXManager vfxManager { get; private set; }
     public Enemy_IdleState IdleState { get; private set; }
     public Enemy_RunState RunState { get; private set; }
     public Enemy_AttackState AttackState { get; private set; }
@@ -28,11 +29,10 @@ public class EnemyController : MonoBehaviour, IAttackable , ICounterable
     public Enemy_OnDamageState OnDamageState { get; private set; }
     public Enemy_StunnedState StunnedState { get; private set; }
     public StateMachine StateMachine { get; private set; }
-    private IVFX onDamageVFX;
     [field: SerializeField] public bool IsAttacked { get; private set; }
     private Coroutine knockBackCo;
     [field:SerializeField] public Transform sendered { get; private set; }
-    public bool CanStunned { get; private set; }
+    private Coroutine TakeDamageCo;
     private void Awake()
     {
         StateMachine = new StateMachine();
@@ -51,7 +51,6 @@ public class EnemyController : MonoBehaviour, IAttackable , ICounterable
 
     private void Start()
     {
-        onDamageVFX = _vfxSelect.Create(VFXType.DamageVFX);
         CanStunned = false;
     }
 
@@ -84,7 +83,8 @@ public class EnemyController : MonoBehaviour, IAttackable , ICounterable
     {
         healthSystem.Detuc(hit.Damage);
         if (healthSystem.IsDead()) return;
-        onDamageVFX.ApplyEffect(this.gameObject, 0.2f);
+        vfxManager.StopAllVFX();
+        vfxManager.GetVFX(TypeOfVFX.ONHIT).ApplyEffect();
         sendered = hit.Sender;
         TakeKnockback(hit);
     }
@@ -122,4 +122,5 @@ public class EnemyController : MonoBehaviour, IAttackable , ICounterable
        if(!CanStunned) return;
        StateMachine.ChangeState(StunnedState);
     }
+    
 }

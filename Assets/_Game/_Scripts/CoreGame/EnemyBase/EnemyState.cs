@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class EnemyState : EntityState
 {
-    protected EnemyController _controller;
+    protected Enemy _controller;
     protected StateMachine _stateMachine;
     protected EnemyMovement _movement;
     protected float stateTimer;
-    public EnemyState(EnemyController controller,EnemyMovement movement,StateMachine _state, string _animationName) : base(_state, _animationName)
+    public EnemyState(Enemy controller,EnemyMovement movement,StateMachine _state, string _animationName) : base(_state, _animationName)
     {
         _controller = controller;
         animator = _controller.animator;

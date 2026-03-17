@@ -4,7 +4,7 @@ public class Enemy_BattleState : EnemyState
 {
     private Transform player;
     
-    public Enemy_BattleState(EnemyController controller, EnemyMovement movement, StateMachine _state, string _animationName) : base(controller, movement, _state, _animationName)
+    public Enemy_BattleState(Enemy controller, EnemyMovement movement, StateMachine _state, string _animationName) : base(controller, movement, _state, _animationName)
     {
     }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy_AttackState : EnemyState
 {
-    public Enemy_AttackState(EnemyController controller, EnemyMovement movement, StateMachine _state, string _animationName) : base(controller, movement, _state, _animationName)
+    public Enemy_AttackState(Enemy controller, EnemyMovement movement, StateMachine _state, string _animationName) : base(controller, movement, _state, _animationName)
     {
     }
 

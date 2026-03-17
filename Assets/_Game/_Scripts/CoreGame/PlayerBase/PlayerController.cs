@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour,IAttackable
     [SerializeField] private PlayerInteract _interact;
     [SerializeField] private AnimationTrigger trigger;
     [SerializeField] private HealthSystem HealthSystem;
-    [SerializeField] private VFXSelect _vfxSelect;
+    [SerializeField] private VFXManager vfxManager;
     private AnimationTriggerHandler triggerHandler;
     public Player_InputTesst input { get; private set; }
     public StateMachine state;
@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour,IAttackable
     public PlayerOnDamageState OnDamageState { get; private set; }
     public PlayerDeadState DeadState { get; private set; }
     public Vector2 MovementInput { get; private set; }
-    private IVFX onDamageVFX;
     private Coroutine knockBackCo;
     public bool IsAttacked { get; private set; }
     void Awake()
@@ -74,7 +73,6 @@ public class PlayerController : MonoBehaviour,IAttackable
     void Start()
     {
         state.Initialize(GroundedState);
-        onDamageVFX = _vfxSelect.Create(VFXType.DamageVFX);
     }
 
     void Update()
@@ -89,8 +87,8 @@ public class PlayerController : MonoBehaviour,IAttackable
     public void TakeDamage(HitData hit)
     {
         if(HealthSystem.IsDead()) return;
+        vfxManager.GetVFX(TypeOfVFX.ONHIT).ApplyEffect();
         HealthSystem.Detuc(hit.Damage);
-        onDamageVFX?.ApplyEffect(this.gameObject,0.2f);
         TakeKnockback(hit);
     }
 
@@ -124,4 +122,5 @@ public class PlayerController : MonoBehaviour,IAttackable
         Movement.rigi.simulated = false;
         this.enabled = false;
     }
+    
 }

@@ -1,11 +1,30 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemyStunnedTrigger : AnimationTrigger
 {
-    [SerializeField] private EnemyController _controller;
+    [SerializeField] private Enemy _controller;
+    [FormerlySerializedAs("holder")] [SerializeField] private VFXManager vfxManager;
 
-    public void StunnedHandle()
+    public void StartAlert()
     {
-        _controller.HandleStunn(!_controller.CanStunned);
+        vfxManager.GetVFX(TypeOfVFX.ALERT).ApplyEffect();
     }
+
+    public void StopAlert()
+    {
+        vfxManager.GetVFX(TypeOfVFX.ALERT).RemoveEffect();
+    }
+    
+    public void StartStunnedHandle()
+    {
+        _controller.HandleStunn(true);
+    }
+
+    public void EndStunnedHandle()
+    {
+        _controller.HandleStunn(false);
+    }
+    
 }

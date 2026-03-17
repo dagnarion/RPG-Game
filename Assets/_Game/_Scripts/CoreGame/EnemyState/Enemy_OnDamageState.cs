@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy_OnDamageState : EnemyState
 {
-    public Enemy_OnDamageState(EnemyController controller, EnemyMovement movement, StateMachine _state, string _animationName) : base(controller, movement, _state, _animationName)
+    public Enemy_OnDamageState(Enemy controller, EnemyMovement movement, StateMachine _state, string _animationName) : base(controller, movement, _state, _animationName)
     {
     }
 

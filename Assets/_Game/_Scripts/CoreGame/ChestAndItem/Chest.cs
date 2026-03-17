@@ -1,19 +1,20 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Chest : MonoBehaviour,IInteractable,IAttackable
 {
     [Header("CONFIG")] 
     [SerializeField] private Vector2 knockBack;
-
+    [SerializeField] private float Duration;
     private bool isOpen;
     [Header("REFERENCE")]
     [SerializeField] private Animator _animator;
-    [SerializeField] private VFXSelect _vfxSelect;
+    [FormerlySerializedAs("holder")] [SerializeField] private VFXManager vfxManager;
     private Rigidbody2D rigi;
-    private IVFX vfx;
+    
     private Coroutine openCoroutine;
     private void Awake()
     {
@@ -22,11 +23,9 @@ public class Chest : MonoBehaviour,IInteractable,IAttackable
 
     private void Start()
     {
-        vfx = _vfxSelect.Create(VFXType.DamageVFX);
         isOpen = false;
     }
-
-
+    
     public void Interact()
     {
         if(isOpen) return;
@@ -40,13 +39,12 @@ public class Chest : MonoBehaviour,IInteractable,IAttackable
         {
             StopCoroutine(openCoroutine);
         }
-
+        vfxManager.GetVFX(TypeOfVFX.ONHIT).ApplyEffect();
         openCoroutine = StartCoroutine(Open());
     }
 
     IEnumerator Open()
     {
-        vfx.ApplyEffect(this.gameObject,0.2f);
         _animator.SetBool("Open",true);
         rigi.linearVelocity = knockBack;
         rigi.angularVelocity = Random.Range(-200f, 200f);

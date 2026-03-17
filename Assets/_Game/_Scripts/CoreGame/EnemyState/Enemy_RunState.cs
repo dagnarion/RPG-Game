@@ -3,7 +3,7 @@ using UnityEngine;
 public class Enemy_RunState : EnemyState
 {
     private float timer;
-    public Enemy_RunState(EnemyController controller, EnemyMovement movement, StateMachine _state, string _animationName) : base(controller, movement, _state, _animationName)
+    public Enemy_RunState(Enemy controller, EnemyMovement movement, StateMachine _state, string _animationName) : base(controller, movement, _state, _animationName)
     {
     }
 
