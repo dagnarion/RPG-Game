@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerJumpAttack : PlayerState
 {
     private bool IsOnGround = false;
-    public PlayerJumpAttack(PlayerController _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
+    public PlayerJumpAttack(Player _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
     {
     }
 

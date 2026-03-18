@@ -9,6 +9,7 @@ public abstract class EntityState
     // Value
     protected string animationName;
     protected bool IsAnimationDone;
+    protected float stateTimer;
     public EntityState (StateMachine _state,string _animationName)
     {
         state = _state;
@@ -23,6 +24,7 @@ public abstract class EntityState
     
     public virtual void Update()
     {
+        stateTimer -= Time.deltaTime;
     }
     
     public virtual void Exit()

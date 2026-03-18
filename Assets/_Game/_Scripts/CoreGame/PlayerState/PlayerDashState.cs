@@ -4,7 +4,7 @@ public class PlayerDashState : PlayerState
 {
     private CustomTimeCount timeCount;
     private float originGravityScale;
-    public PlayerDashState(PlayerController _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
+    public PlayerDashState(Player _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
     {
         timeCount = new CustomTimeCount();
         timeCount.SetDuration(movement.DashDuration);

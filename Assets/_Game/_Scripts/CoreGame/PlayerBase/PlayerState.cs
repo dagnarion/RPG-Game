@@ -3,10 +3,11 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerState : EntityState
 {
-    [SerializeField] protected PlayerController player;
+    [SerializeField] protected Player player;
     protected PlayerMovement movement;
     protected Player_InputTesst input;
-    protected PlayerState(PlayerController _player,StateMachine _state, string _animationName) : base(_state, _animationName)
+    protected bool CanDoCounter = true;
+    protected PlayerState(Player _player,StateMachine _state, string _animationName) : base(_state, _animationName)
     {
         player = _player;
         animator = player.animator;
@@ -17,6 +18,7 @@ public abstract class PlayerState : EntityState
     
     public override void Update()
     {
+        base.Update();
         if (player.IsAttacked)
         {
             state.ChangeState(player.OnDamageState);
@@ -27,6 +29,11 @@ public abstract class PlayerState : EntityState
         {
             state.ChangeState(player.DashState);
             return;
+        }
+
+        if (input.Player.Counter.WasPressedThisFrame() && CanDoCounter)
+        {
+            state.ChangeState(player.CounterState);
         }
     }
     

@@ -22,6 +22,7 @@ public class MeleeCombat : MonoBehaviour, ICombat
         }
     }
 
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(attackPoint.position,attackRadius);

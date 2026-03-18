@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerOnDamageState : PlayerState
 {
-    public PlayerOnDamageState(PlayerController _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
+    public PlayerOnDamageState(Player _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
     {
     }
 

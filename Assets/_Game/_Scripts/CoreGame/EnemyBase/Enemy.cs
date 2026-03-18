@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
     [SerializeField] private float maxHp;
     [field: SerializeField] public float AnimationTransitionTime { get; private set; }
     public bool CanStunned { get; private set; }
+    public bool CanCounter => CanStunned;
     [Header("REFERENCE")]
     [field: SerializeField]
     public Animator animator { get; private set; }
@@ -33,6 +34,7 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
     private Coroutine knockBackCo;
     [field:SerializeField] public Transform sendered { get; private set; }
     private Coroutine TakeDamageCo;
+    
     private void Awake()
     {
         StateMachine = new StateMachine();
@@ -44,14 +46,13 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
         OnDamageState = new Enemy_OnDamageState(this, movement, StateMachine, "OnDamage");
         StunnedState = new Enemy_StunnedState(this, movement, StateMachine, "Stunned");
         triggerHandler = new AnimationTriggerHandler(StateMachine);
-        CombatMode.SetCombatMode(global::CombatMode.MeleeCombat);
-        trigger.Init(triggerHandler, CombatMode.GetCurrentCombatMode());
         healthSystem.Init(maxHp);
     }
 
     private void Start()
     {
         CanStunned = false;
+        trigger.Init(triggerHandler, CombatMode.GetCombatMode(CombatType.MeleeCombat));
     }
 
     private void OnEnable()
@@ -116,6 +117,7 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
         StateMachine.ChangeState(DeadState);
         this.enabled = false;
     }
+    
 
     public void HandleCounter()
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerGroundedState : PlayerState
 {
     private float Timer = 0;
-    public PlayerGroundedState(PlayerController _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
+    public PlayerGroundedState(Player _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
     {
     }
     public override void Enter()

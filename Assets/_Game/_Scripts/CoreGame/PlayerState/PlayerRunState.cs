@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerRunState : PlayerState
 {
-    public PlayerRunState(PlayerController _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
+    public PlayerRunState(Player _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
     {
     }
 

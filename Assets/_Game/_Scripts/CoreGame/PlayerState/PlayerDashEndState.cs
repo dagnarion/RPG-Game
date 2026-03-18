@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerDashEndState : PlayerState
 {
-    public PlayerDashEndState(PlayerController _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
+    public PlayerDashEndState(Player _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
     {
     }
 

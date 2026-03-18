@@ -7,7 +7,7 @@ public class PlayerAttackState : PlayerState
     private int currentIndex = 0;
     private int IndexLimit = 3;
     private bool comboAttackQueue = false;
-    public PlayerAttackState(PlayerController _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
+    public PlayerAttackState(Player _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
     {
     }
 

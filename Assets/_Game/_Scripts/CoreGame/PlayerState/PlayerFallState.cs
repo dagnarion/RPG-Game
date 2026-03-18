@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerFallState : PlayerState
 {
     private float fallSpeed;
-    public PlayerFallState(PlayerController _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
+    public PlayerFallState(Player _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
     {
     }
 

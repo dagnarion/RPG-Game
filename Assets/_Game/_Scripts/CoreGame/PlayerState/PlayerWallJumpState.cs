@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerWallJumpState : PlayerState
 {
     private CustomTimeCount timeCount;
-    public PlayerWallJumpState(PlayerController _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
+    public PlayerWallJumpState(Player _player, StateMachine _state, string _animationName) : base(_player, _state, _animationName)
     {
         timeCount = new CustomTimeCount();
         timeCount.SetDuration(0.2f);

@@ -4,10 +4,12 @@ using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-public class PlayerController : MonoBehaviour,IAttackable
+public class Player : MonoBehaviour,IAttackable
 {
+    #region  Data
     [Header("CONFIG")] 
     [SerializeField] private float maxHp;
+    [SerializeField] private float counterRadius;
     [Header("Reference")] 
     [SerializeField] private SelectCombatMode combatMode;
     [field: SerializeField] public Animator animator { get; private set; }
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour,IAttackable
     [SerializeField] private AnimationTrigger trigger;
     [SerializeField] private HealthSystem HealthSystem;
     [SerializeField] private VFXManager vfxManager;
+    [SerializeField] private Transform counterDetectPoint;
     private AnimationTriggerHandler triggerHandler;
     public Player_InputTesst input { get; private set; }
     public StateMachine state;
@@ -31,9 +34,12 @@ public class PlayerController : MonoBehaviour,IAttackable
     public PlayerJumpAttack JumpAttack { get; private set; }
     public PlayerOnDamageState OnDamageState { get; private set; }
     public PlayerDeadState DeadState { get; private set; }
+    public PlayerCounterState CounterState { get; private set; }
     public Vector2 MovementInput { get; private set; }
     private Coroutine knockBackCo;
     public bool IsAttacked { get; private set; }
+    #endregion
+   
     void Awake()
     {
         input = new Player_InputTesst();
@@ -50,9 +56,8 @@ public class PlayerController : MonoBehaviour,IAttackable
         JumpAttack = new PlayerJumpAttack(this, state, "JumpAttack");
         OnDamageState = new PlayerOnDamageState(this, state, "OnDamage");
         DeadState = new PlayerDeadState(this, state, "Dead");
+        CounterState = new PlayerCounterState(this, state, "StartCounter");
         triggerHandler = new AnimationTriggerHandler(state);
-        combatMode.SetCombatMode(CombatMode.MeleeCombat);
-        trigger.Init(triggerHandler,combatMode.GetCurrentCombatMode());
         HealthSystem.Init(maxHp);
     }
 
@@ -73,6 +78,7 @@ public class PlayerController : MonoBehaviour,IAttackable
     void Start()
     {
         state.Initialize(GroundedState);
+        trigger.Init(triggerHandler,combatMode.GetCombatMode(CombatType.MeleeCombat));
     }
 
     void Update()
@@ -83,6 +89,8 @@ public class PlayerController : MonoBehaviour,IAttackable
             _interact.Interact();
         }
     }
+
+    #region DamageHandler
     
     public void TakeDamage(HitData hit)
     {
@@ -122,5 +130,31 @@ public class PlayerController : MonoBehaviour,IAttackable
         Movement.rigi.simulated = false;
         this.enabled = false;
     }
-    
+
+    #endregion
+    // tạm sau refactor
+    public bool CanCounter()
+    {
+        bool HasCounter = false;
+        Collider2D[] entityInRanges = Physics2D.OverlapCircleAll(counterDetectPoint.position, counterRadius);
+        if (entityInRanges == null) return HasCounter;
+        foreach (var entity in entityInRanges)
+        {
+            if (entity.TryGetComponent<ICounterable>(out var counterable))
+            {
+                if (counterable.CanCounter)
+                {
+                    HasCounter = true;
+                    counterable.HandleCounter();
+                }
+            }
+        }
+        return HasCounter;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(counterDetectPoint == null) return;
+        Gizmos.DrawWireSphere(counterDetectPoint.position,counterRadius);
+    }
 }
