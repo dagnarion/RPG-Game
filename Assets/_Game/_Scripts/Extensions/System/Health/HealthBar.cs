@@ -18,6 +18,11 @@ public class HealthBar : MonoBehaviour
         health.OnDeadEvent += HideHealthBar;
     }
 
+    private void Update()
+    { 
+        transform.rotation = Quaternion.identity;
+    }
+
 
     public void ChangeHealthBar(object sender, EventArgs eventArgs)
     {
