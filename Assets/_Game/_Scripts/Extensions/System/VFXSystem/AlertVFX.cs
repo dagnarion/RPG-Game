@@ -6,15 +6,14 @@ public class AlertVFX : MonoBehaviour,IVFX
     [Header("REFERENCE")]
     [SerializeField] private GameObject alertPrefab;
     [SerializeField] private Transform holder;
-    [SerializeField] private Transform appearPosition;
     private GameObject alert;
 
     public void Start()
     {
-        alert = Instantiate(alertPrefab);
+        alert = Instantiate(alertPrefab,holder);
     }
 
-    public void ApplyEffect()
+    public void ApplyEffect(Transform appearPosition)
     {
         alert.transform.position = appearPosition.position;
         alert.SetActive(true);

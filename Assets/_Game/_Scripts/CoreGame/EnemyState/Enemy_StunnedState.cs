@@ -11,7 +11,7 @@ public class Enemy_StunnedState : EnemyState
         base.Enter();
         _controller.HandleStunn(false);
         _controller.vfxManager.StopAllVFX();
-        _controller.vfxManager.GetVFX(TypeOfVFX.STUN).ApplyEffect();
+        _controller.vfxManager.GetVFX(TypeOfVFX.STUN).ApplyEffect(_controller.StunPoint.transform);
         stateTimer = _movement.StunnTime;
         _movement.SetVelocity(_movement.StunnedVelocity.x * -_movement.FlipHandler.FacingDirection,_movement.StunnedVelocity.y);
     }
@@ -19,7 +19,7 @@ public class Enemy_StunnedState : EnemyState
     public override void Update()
     {
         base.Update();
-        _controller.vfxManager.GetVFX(TypeOfVFX.STUN).ApplyEffect();
+        _controller.vfxManager.GetVFX(TypeOfVFX.STUN).ApplyEffect(_controller.StunPoint.transform);
         if (stateTimer <= 0f)
         {
             state.ChangeState(_controller.BattleState);

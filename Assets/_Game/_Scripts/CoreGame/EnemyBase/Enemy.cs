@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
         healthSystem.Detuc(hit.Damage);
         if (healthSystem.IsDead()) return;
         vfxManager.StopAllVFX();
-        vfxManager.GetVFX(TypeOfVFX.ONHIT).ApplyEffect();
+        vfxManager.GetVFX(TypeOfVFX.ONDAMAGE).ApplyEffect(this.gameObject.transform);
         sendered = hit.Sender;
         TakeKnockback(hit);
     }

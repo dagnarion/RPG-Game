@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IVFX
 {
-    public void ApplyEffect();
+    public void ApplyEffect(Transform position);
     public void RemoveEffect();
 }

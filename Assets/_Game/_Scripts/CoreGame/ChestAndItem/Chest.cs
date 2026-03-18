@@ -39,7 +39,7 @@ public class Chest : MonoBehaviour,IInteractable,IAttackable
         {
             StopCoroutine(openCoroutine);
         }
-        vfxManager.GetVFX(TypeOfVFX.ONHIT).ApplyEffect();
+        vfxManager.GetVFX(TypeOfVFX.ONDAMAGE).ApplyEffect(this.gameObject.transform);
         openCoroutine = StartCoroutine(Open());
     }
 

@@ -5,15 +5,14 @@ public class StunVFX : MonoBehaviour,IVFX
     [Header("REFERENCE")]
     [SerializeField] private GameObject stunPrefab;
     [SerializeField] private Transform holder;
-    [SerializeField] private Transform appearPosition;
     private GameObject stun;
 
     public void Start()
     {
-        stun = Instantiate(stunPrefab);
+        stun = Instantiate(stunPrefab,holder);
     }
 
-    public void ApplyEffect()
+    public void ApplyEffect(Transform appearPosition)
     {
         stun.transform.position = appearPosition.position;
        if(!stun.activeSelf) stun.SetActive(true);

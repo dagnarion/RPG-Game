@@ -46,7 +46,8 @@ public class VFXType
 public enum TypeOfVFX
 {
     NONE = 0,
-    ONHIT = 1,
+    ONDAMAGE = 1,
     ALERT = 2,
-    STUN = 3
+    STUN = 3,
+    ONHIT = 4
 }

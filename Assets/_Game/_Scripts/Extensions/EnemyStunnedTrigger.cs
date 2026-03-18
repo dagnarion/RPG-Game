@@ -9,7 +9,7 @@ public class EnemyStunnedTrigger : AnimationTrigger
 
     public void StartAlert()
     {
-        vfxManager.GetVFX(TypeOfVFX.ALERT).ApplyEffect();
+        vfxManager.GetVFX(TypeOfVFX.ALERT).ApplyEffect(_controller.AlertPoint.transform);
     }
 
     public void StopAlert()

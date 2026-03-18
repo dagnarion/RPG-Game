@@ -4,6 +4,7 @@ using UnityEngine;
 public class MeleeCombat : MonoBehaviour, ICombat
 {
     [Header("CONFIG")] 
+    [SerializeField] private VFXManager _vfxManager;
     [SerializeField] private HitData damageData;
     [SerializeField] private float attackRadius;
     [SerializeField] LayerMask whatIsTarget;
@@ -18,6 +19,7 @@ public class MeleeCombat : MonoBehaviour, ICombat
             if (entity.TryGetComponent<IAttackable>(out var attackable))
             {
                 attackable.TakeDamage(damageData);
+                _vfxManager.GetVFX(TypeOfVFX.ONHIT).ApplyEffect(entity.transform);
             }
         }
     }

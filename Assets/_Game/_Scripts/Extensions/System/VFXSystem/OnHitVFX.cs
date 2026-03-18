@@ -1,39 +1,29 @@
-using System.Collections;
 using UnityEngine;
 
 public class OnHitVFX : MonoBehaviour,IVFX
 {
-   [Header("CONFIG")] 
-   [SerializeField] private float duration;
-   [Header("REFERENCE")]
-   [SerializeField] private Material originMaterial;
-   [SerializeField] private Material onHitMaterial;
-   [SerializeField] private SpriteRenderer objectToApply;
-   private Coroutine EffectCo;
+    [Header("CONFIG")] 
+    [SerializeField] private Vector2 minOffSet;
+    [SerializeField] private Vector2 maxOffSet;
+    [Header("REFERENCE")] 
+    [SerializeField] private GameObject onHitPrefab;
+    [SerializeField] private Transform holder;
+    
+    public void ApplyEffect(Transform appearPosition)
+    {
+        GameObject onHit = Instantiate(onHitPrefab,holder);
+        
+        float xOffSet = Random.Range(minOffSet.x,maxOffSet.x);
+        float yOffSet = Random.Range(minOffSet.y,maxOffSet.y);
+        
+        onHit.transform.position = appearPosition.position + new Vector3(xOffSet,yOffSet,0);
+        onHit.SetActive(true);
+    }
+
+    public void RemoveEffect()
+    {
+        
+    }
+
    
-   public void ApplyEffect()
-   {
-      if (EffectCo != null)
-      {
-         StopCoroutine(EffectCo);
-      }
-      EffectCo = StartCoroutine(TakeEffect(duration));
-   }
-
-   public void RemoveEffect()
-   {
-      if (EffectCo != null)
-      {
-         StopCoroutine(EffectCo);
-      }
-      objectToApply.material = originMaterial;
-   }
-
-   IEnumerator TakeEffect(float duration)
-   {
-      objectToApply.material = onHitMaterial;
-      yield return new WaitForSeconds(duration);
-      objectToApply.material = originMaterial;
-   }
-
 }
