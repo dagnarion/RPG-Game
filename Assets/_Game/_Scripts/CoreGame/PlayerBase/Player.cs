@@ -3,12 +3,12 @@ using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour,IAttackable
 {
     #region  Data
     [Header("CONFIG")] 
-    [SerializeField] private float maxHp;
     [SerializeField] private float counterRadius;
     [Header("Reference")] 
     [SerializeField] private SelectCombatMode combatMode;
@@ -20,6 +20,7 @@ public class Player : MonoBehaviour,IAttackable
     [SerializeField] private HealthSystem HealthSystem;
     [SerializeField] private VFXManager vfxManager;
     [SerializeField] private Transform counterDetectPoint;
+    [SerializeField] private Entity_Stats stats;
     private AnimationTriggerHandler triggerHandler;
     public Player_InputTesst input { get; private set; }
     public StateMachine state;
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour,IAttackable
     public Vector2 MovementInput { get; private set; }
     private Coroutine knockBackCo;
     public bool IsAttacked { get; private set; }
+    [SerializeField] private HitData _hitData;
     #endregion
    
     void Awake()
@@ -58,7 +60,7 @@ public class Player : MonoBehaviour,IAttackable
         DeadState = new PlayerDeadState(this, state, "Dead");
         CounterState = new PlayerCounterState(this, state, "StartCounter");
         triggerHandler = new AnimationTriggerHandler(state);
-        HealthSystem.Init(maxHp);
+        HealthSystem.Init(stats.GetMaxHealth());
     }
 
     void OnEnable()
@@ -66,19 +68,21 @@ public class Player : MonoBehaviour,IAttackable
         input.Enable();
         input.Player.Movement.performed += ctx => MovementInput = ctx.ReadValue<Vector2>();
         input.Player.Movement.canceled += ctx => MovementInput = Vector2.zero;
+        trigger.OnAttack += Attack;
         HealthSystem.OnDeadEvent += DeadHandler;
         HealthSystem.Reborn();
     }
     void OnDisable()
     {
         input.Disable();
+        trigger.OnAttack -= Attack;
         HealthSystem.OnDeadEvent -= DeadHandler;
     }
 
     void Start()
     {
         state.Initialize(GroundedState);
-        trigger.Init(triggerHandler,combatMode.GetCombatMode(CombatType.MeleeCombat));
+        trigger.Init(triggerHandler);
     }
 
     void Update()
@@ -92,13 +96,17 @@ public class Player : MonoBehaviour,IAttackable
 
     #region DamageHandler
     
-    public void TakeDamage(HitData hit)
+    public bool TakeDamage(HitData hit)
     {
-        if(HealthSystem.IsDead()) return;
+        if(HealthSystem.IsDead()) {return false;}
+        if(CanEvasion()) return false;
         vfxManager.GetVFX(TypeOfVFX.ONDAMAGE).ApplyEffect(this.gameObject.transform);
         HealthSystem.Detuc(hit.Damage);
         TakeKnockback(hit);
+        return true;
     }
+
+    private bool CanEvasion() => Random.Range(0,100) <= stats.GetEvasion();
 
     private void TakeKnockback(HitData hit)
     {
@@ -152,6 +160,11 @@ public class Player : MonoBehaviour,IAttackable
         return HasCounter;
     }
 
+    public void Attack()
+    {
+        _hitData.SetDamage(stats.GetDamage());
+        combatMode.GetCombatMode(CombatType.MeleeCombat).Attack(_hitData);
+    }
     private void OnDrawGizmos()
     {
         if(counterDetectPoint == null) return;

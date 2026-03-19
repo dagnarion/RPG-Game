@@ -1,14 +1,13 @@
+using System;
 using UnityEngine;
 
 public class AnimationTrigger : MonoBehaviour
 {
     [SerializeField] private IComplete complete;
-    [SerializeField] private ICombat combat;
-    
-    public void Init(IComplete _complete,ICombat combat)
+    public event Action OnAttack;
+    public void Init(IComplete _complete)
     {
         complete = _complete;
-        this.combat = combat;
     }
     public void AnimationDone()
     {
@@ -17,7 +16,7 @@ public class AnimationTrigger : MonoBehaviour
 
     public void CombatAnimation()
     {
-        combat.Attack();
+       OnAttack?.Invoke();
     }
     
     

@@ -1,4 +1,4 @@
 public interface ICombat
 {
-    public void Attack();
+    public void Attack(HitData damageData);
 }

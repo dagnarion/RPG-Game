@@ -32,15 +32,16 @@ public class Chest : MonoBehaviour,IInteractable,IAttackable
        _animator.SetBool("Open",true);
     }
 
-    public void TakeDamage(HitData hit)
+    public bool TakeDamage(HitData hit)
     {
-        if(isOpen) return;
+        if(isOpen) return false;
         if (openCoroutine != null)
         {
             StopCoroutine(openCoroutine);
         }
         vfxManager.GetVFX(TypeOfVFX.ONDAMAGE).ApplyEffect(this.gameObject.transform);
         openCoroutine = StartCoroutine(Open());
+        return true;
     }
 
     IEnumerator Open()

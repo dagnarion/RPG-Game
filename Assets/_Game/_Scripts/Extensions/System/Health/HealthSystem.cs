@@ -6,7 +6,8 @@ public class HealthSystem : MonoBehaviour
     private float currentHp;
     public event EventHandler HealthChangeEvent;
     public event EventHandler OnDeadEvent;
-    private bool CheckingIfDeadOrNo;
+    
+    
     public void Init(float maxHp)
     {
         this.maxHp = maxHp;

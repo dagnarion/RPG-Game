@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 public class Enemy : MonoBehaviour, IAttackable , ICounterable
 {
     [Header("CONFIG")] 
-    [SerializeField] private float maxHp;
     [field: SerializeField] public float AnimationTransitionTime { get; private set; }
+    [SerializeField] private HitData _hitData;
     public bool CanStunned { get; private set; }
     public bool CanCounter => CanStunned;
     [Header("REFERENCE")]
@@ -21,6 +20,7 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
     [SerializeField] private AnimationTrigger trigger;
     [SerializeField] private AnimationTriggerHandler triggerHandler;
     [SerializeField] private HealthSystem healthSystem;
+    [SerializeField] private Entity_Stats stats;
     [field:SerializeField] public VFXManager vfxManager { get; private set; }
     public Enemy_IdleState IdleState { get; private set; }
     public Enemy_RunState RunState { get; private set; }
@@ -46,13 +46,13 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
         OnDamageState = new Enemy_OnDamageState(this, movement, StateMachine, "OnDamage");
         StunnedState = new Enemy_StunnedState(this, movement, StateMachine, "Stunned");
         triggerHandler = new AnimationTriggerHandler(StateMachine);
-        healthSystem.Init(maxHp);
+        healthSystem.Init(stats.GetMaxHealth());
     }
 
     private void Start()
     {
         CanStunned = false;
-        trigger.Init(triggerHandler, CombatMode.GetCombatMode(CombatType.MeleeCombat));
+        trigger.Init(triggerHandler);
     }
 
     private void OnEnable()
@@ -60,12 +60,14 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
         healthSystem.OnDeadEvent += movement.OnDeadHandler;
         healthSystem.OnDeadEvent += DeadHandler;
         healthSystem.Reborn();
+        trigger.OnAttack += Attack;
         StateMachine.Initialize(IdleState);
     }
 
     private void OnDisable()
     {
         healthSystem.OnDeadEvent -= DeadHandler;
+        trigger.OnAttack -= Attack;
         healthSystem.OnDeadEvent -= movement.OnDeadHandler;
     }
 
@@ -80,15 +82,19 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
 
     public void HandleStunn(bool enable) => CanStunned = enable;
 
-    public void TakeDamage(HitData hit)
+    public bool TakeDamage(HitData hit)
     {
+        if (healthSystem.IsDead()) return false;
+        if(CanEvasion()) return false;
         healthSystem.Detuc(hit.Damage);
-        if (healthSystem.IsDead()) return;
         vfxManager.StopAllVFX();
         vfxManager.GetVFX(TypeOfVFX.ONDAMAGE).ApplyEffect(this.gameObject.transform);
         sendered = hit.Sender;
         TakeKnockback(hit);
+        return true;
     }
+    
+    private bool CanEvasion() => Random.Range(0,100) <= stats.GetEvasion();
 
     private void TakeKnockback(HitData hit)
     {
@@ -123,6 +129,12 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
     {
        if(!CanStunned) return;
        StateMachine.ChangeState(StunnedState);
+    }
+    
+    public void Attack()
+    {
+        _hitData.SetDamage(stats.GetDamage());
+        CombatMode.GetCombatMode(CombatType.MeleeCombat).Attack(_hitData);
     }
     
 }

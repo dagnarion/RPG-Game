@@ -9,6 +9,7 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        Timer = 0;
         movement.SetVelocity(0,rigi.linearVelocityY);
     }
 

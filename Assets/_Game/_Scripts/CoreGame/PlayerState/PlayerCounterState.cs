@@ -11,7 +11,7 @@ public class PlayerCounterState : PlayerState
     {
         base.Enter();
         CanDoCounter = false;
-        movement.SetVelocity(0,0);
+       if(rigi.linearVelocityY > 0) movement.SetVelocity(0,0);
         stateTimer = 0.2f;
         counterSomebody = false;
     }
@@ -19,7 +19,7 @@ public class PlayerCounterState : PlayerState
     public override void Update()
     {
         base.Update();
-        movement.SetVelocity(0,0);
+        movement.SetVelocity(0,movement.rigi.linearVelocityY);
 
         if (player.CanCounter())
         {
