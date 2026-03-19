@@ -133,7 +133,7 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
     
     public void Attack()
     {
-        _hitData.SetDamage(stats.GetDamage());
+        _hitData.SetDamage(stats.GetDamage(out bool isCrit));
         CombatMode.GetCombatMode(CombatType.MeleeCombat).Attack(_hitData);
     }
     

@@ -12,5 +12,7 @@ public class HitData
     [field:SerializeField] public Vector2 KnockBackForce { get; private set; }
     [field:SerializeField] public float KnockBackDuration { get; private set; }
     public float Damage { get; private set; }
+    public bool IsCrit { get; private set; }
     public void SetDamage(float amount) => Damage = amount;
+    public void SetCrit(bool condition) => IsCrit = condition;
 }

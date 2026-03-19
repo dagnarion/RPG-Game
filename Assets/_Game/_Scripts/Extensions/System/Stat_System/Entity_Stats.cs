@@ -7,7 +7,7 @@ public class Entity_Stats : MonoBehaviour
   [SerializeField] private Stat_Deffensive deffensive;
   [SerializeField] private Stat_Offense offense;
 
-  public float GetDamage()
+  public float GetDamage(out bool IsCrit)
   {
       float baseDamage = offense.Damage.GetValue();
       float bonusDamage = major.Strength.GetValue();
@@ -16,7 +16,8 @@ public class Entity_Stats : MonoBehaviour
       float baseCritPower = offense.CritPower.GetValue();
       float bonusCritDamage = major.Strength.GetValue() * 0.5f;
       float critPower = (baseCritPower + bonusCritDamage) / 100;
-      float finalDamage = (Random.Range(0, 100) <= offense.CritChance.GetValue()) ? critPower * totalDamage : totalDamage;
+      IsCrit = Random.Range(0, 100) <= offense.CritChance.GetValue();
+      float finalDamage = IsCrit ? critPower * totalDamage : totalDamage;
       return finalDamage;
   }
   

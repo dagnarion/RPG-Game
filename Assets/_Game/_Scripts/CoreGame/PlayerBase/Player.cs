@@ -162,7 +162,8 @@ public class Player : MonoBehaviour,IAttackable
 
     public void Attack()
     {
-        _hitData.SetDamage(stats.GetDamage());
+        _hitData.SetDamage(stats.GetDamage(out bool isCrit));
+        _hitData.SetCrit(isCrit);
         combatMode.GetCombatMode(CombatType.MeleeCombat).Attack(_hitData);
     }
     private void OnDrawGizmos()

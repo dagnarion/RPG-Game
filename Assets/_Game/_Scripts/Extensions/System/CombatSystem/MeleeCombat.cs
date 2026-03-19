@@ -18,7 +18,11 @@ public class MeleeCombat : MonoBehaviour, ICombat
             if (entity.TryGetComponent<IAttackable>(out var attackable))
             {
              bool canTakeDamage =   attackable.TakeDamage(damageData);
-              if(canTakeDamage)  _vfxManager.GetVFX(TypeOfVFX.ONHIT).ApplyEffect(entity.transform);
+             if (canTakeDamage)
+             {
+                 if(!damageData.IsCrit)  _vfxManager.GetVFX(TypeOfVFX.ONHIT).ApplyEffect(entity.transform);
+                 else _vfxManager.GetVFX(TypeOfVFX.ONCRIT).ApplyEffect(entity.transform);
+             }
             }
         }
     }

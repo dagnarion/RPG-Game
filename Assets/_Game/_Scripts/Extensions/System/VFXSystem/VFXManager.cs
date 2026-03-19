@@ -49,5 +49,6 @@ public enum TypeOfVFX
     ONDAMAGE = 1,
     ALERT = 2,
     STUN = 3,
-    ONHIT = 4
+    ONHIT = 4,
+    ONCRIT = 5
 }

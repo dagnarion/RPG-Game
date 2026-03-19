@@ -384,6 +384,7 @@ Transform:
   m_Children:
   - {fileID: 1150719047}
   - {fileID: 1927476509}
+  - {fileID: 1370580822}
   m_Father: {fileID: 305037921}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &281882844
@@ -403,6 +404,8 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 1150719046}
   - <Type>k__BackingField: 4
     <Prefab>k__BackingField: {fileID: 1927476507}
+  - <Type>k__BackingField: 5
+    <Prefab>k__BackingField: {fileID: 1370580821}
 --- !u!1 &305037918
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +694,7 @@ MonoBehaviour:
     <Damage>k__BackingField:
       baseValue: 10
     <CritChance>k__BackingField:
-      baseValue: 100
+      baseValue: 10
     <CritPower>k__BackingField:
       baseValue: 250
     <FireDamage>k__BackingField:
@@ -1146,6 +1149,7 @@ Transform:
   - {fileID: 1439691496}
   - {fileID: 2101524999}
   - {fileID: 1246877875}
+  - {fileID: 901938854}
   m_Father: {fileID: 1016853324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &582490990
@@ -1169,6 +1173,8 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 2101524998}
   - <Type>k__BackingField: 4
     <Prefab>k__BackingField: {fileID: 1246877873}
+  - <Type>k__BackingField: 5
+    <Prefab>k__BackingField: {fileID: 901938853}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1456,55 @@ MonoBehaviour:
   holder:
   - <Type>k__BackingField: 1
     <Prefab>k__BackingField: {fileID: 1010254112}
+--- !u!1 &901938853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 901938854}
+  - component: {fileID: 901938855}
+  m_Layer: 9
+  m_Name: OnCritVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &901938854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901938853}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 582490989}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &901938855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901938853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fa3f5ecf6d7a4a4d98ab9a257a087c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minOffSet: {x: 0, y: 0}
+  maxOffSet: {x: 0, y: 0}
+  owner: {fileID: 1016853324}
+  onCritPrefab: {fileID: 1744865205549616939, guid: a8e944e079ba64c46963b27aab9470d5, type: 3}
+  holder: {fileID: 1954390705}
 --- !u!1 &925729303
 GameObject:
   m_ObjectHideFlags: 0
@@ -7177,7 +7232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <maxHp>k__BackingField:
-    baseValue: 100
+    baseValue: 10000
   major:
     <Vitality>k__BackingField:
       baseValue: 10
@@ -7756,6 +7811,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1370580821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1370580822}
+  - component: {fileID: 1370580823}
+  m_Layer: 9
+  m_Name: OnCritVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1370580822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370580821}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 281882843}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1370580823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370580821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fa3f5ecf6d7a4a4d98ab9a257a087c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minOffSet: {x: 0, y: 0}
+  maxOffSet: {x: -0.5, y: 0.5}
+  owner: {fileID: 305037921}
+  onCritPrefab: {fileID: 1744865205549616939, guid: a8e944e079ba64c46963b27aab9470d5, type: 3}
+  holder: {fileID: 1954390705}
 --- !u!1 &1439691495
 GameObject:
   m_ObjectHideFlags: 0
