@@ -697,12 +697,14 @@ MonoBehaviour:
       baseValue: 10
     <CritPower>k__BackingField:
       baseValue: 250
+    <ArmorReduction>k__BackingField:
+      baseValue: 0
     <FireDamage>k__BackingField:
-      baseValue: 0
+      baseValue: 10
     <IceDamage>k__BackingField:
-      baseValue: 0
+      baseValue: 5
     <LightningDamage>k__BackingField:
-      baseValue: 0
+      baseValue: 6
 --- !u!1 &339863683
 GameObject:
   m_ObjectHideFlags: 0
@@ -7246,7 +7248,7 @@ MonoBehaviour:
     <Evasion>k__BackingField:
       baseValue: 0
     <Armor>k__BackingField:
-      baseValue: 0
+      baseValue: 100
     <FireRes>k__BackingField:
       baseValue: 0
     <IceRes>k__BackingField:
@@ -7259,6 +7261,8 @@ MonoBehaviour:
     <CritChance>k__BackingField:
       baseValue: 0
     <CritPower>k__BackingField:
+      baseValue: 0
+    <ArmorReduction>k__BackingField:
       baseValue: 0
     <FireDamage>k__BackingField:
       baseValue: 0

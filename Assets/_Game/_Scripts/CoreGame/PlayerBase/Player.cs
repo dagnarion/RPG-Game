@@ -101,7 +101,10 @@ public class Player : MonoBehaviour,IAttackable
         if(HealthSystem.IsDead()) {return false;}
         if(CanEvasion()) return false;
         vfxManager.GetVFX(TypeOfVFX.ONDAMAGE).ApplyEffect(this.gameObject.transform);
-        HealthSystem.Detuc(hit.Damage);
+        float physicalDamage = hit.PhysicalDamage*(1-stats.GetArmorMitigation(hit.ArmorReduction));
+        float elementDamage = hit.ElementDamage * (1 - stats.GetElementResitance(hit.ElementDamageType));
+        float finalDamage = physicalDamage + elementDamage;
+        HealthSystem.Detuc(finalDamage);
         TakeKnockback(hit);
         return true;
     }
@@ -162,8 +165,11 @@ public class Player : MonoBehaviour,IAttackable
 
     public void Attack()
     {
-        _hitData.SetDamage(stats.GetDamage(out bool isCrit));
+        _hitData.SetPhysicalDamage(stats.GetPhysicalDamage(out bool isCrit));
+        _hitData.SetElementDamage(stats.GetElementDamage(out ElementType elementType));
         _hitData.SetCrit(isCrit);
+        _hitData.SetArmorReduction(stats.GetArmorReduction());
+        _hitData.SetElementDamageType(elementType);
         combatMode.GetCombatMode(CombatType.MeleeCombat).Attack(_hitData);
     }
     private void OnDrawGizmos()

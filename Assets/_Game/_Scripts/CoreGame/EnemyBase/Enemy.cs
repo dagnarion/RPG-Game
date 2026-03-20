@@ -86,11 +86,17 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
     {
         if (healthSystem.IsDead()) return false;
         if(CanEvasion()) return false;
-        healthSystem.Detuc(hit.Damage);
+        float physicalDamage = hit.PhysicalDamage * (1 - stats.GetArmorMitigation(hit.ArmorReduction));
+        float elementDamage = hit.ElementDamage * (1 - stats.GetElementResitance(hit.ElementDamageType));
+        float finalDamage = physicalDamage + elementDamage;
+        healthSystem.Detuc(finalDamage);
+        
         vfxManager.StopAllVFX();
         vfxManager.GetVFX(TypeOfVFX.ONDAMAGE).ApplyEffect(this.gameObject.transform);
         sendered = hit.Sender;
         TakeKnockback(hit);
+        
+        Debug.Log($"{this.gameObject.name} take {finalDamage} Damage");
         return true;
     }
     
@@ -133,7 +139,10 @@ public class Enemy : MonoBehaviour, IAttackable , ICounterable
     
     public void Attack()
     {
-        _hitData.SetDamage(stats.GetDamage(out bool isCrit));
+        _hitData.SetPhysicalDamage(stats.GetPhysicalDamage(out bool isCrit));
+        _hitData.SetElementDamage(stats.GetElementDamage(out ElementType elementType));
+        _hitData.SetArmorReduction(stats.GetArmorReduction());
+        _hitData.SetElementDamageType(elementType);
         CombatMode.GetCombatMode(CombatType.MeleeCombat).Attack(_hitData);
     }
     
